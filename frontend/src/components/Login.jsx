@@ -15,8 +15,7 @@ export const Login = () => {
         event.preventDefault();
         if (username.trim() === "" || password.trim() === "") {
             alert("Both fields must be filled");
-<<<<<<< HEAD
-=======
+
         } else {
             try {
                 const result = await login({ username, password });
@@ -26,7 +25,6 @@ export const Login = () => {
             } catch (error) {
                 console.error(error); // Aquí puedes manejar errores de la llamada a la API
             }
->>>>>>> 948d131 (nuevo)
         }
     };
 
