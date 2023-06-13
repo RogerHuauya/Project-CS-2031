@@ -73,20 +73,3 @@ export const profile = (req, res) => res.send('profile')
 
 
 
-
-    // export const register2 = async (req, res) => {
-    //     const {author, book_name, status} = req.body
-        
-    //     try {
-    //         const newBook = new Book({
-    //             author,
-    //             book_name,
-    //             status
-    //     });
-    
-    //     await newBook.save();
-    //     res.send('Book added successfully');
-    //     } catch (error) {
-    //         console.log(error)
-    //      }   
-    //     };
