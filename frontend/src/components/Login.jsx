@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Menu } from './Menu';
 import cuaderno from './cuaderno.png';
 import image1 from './image1.jpg';
 import image2 from './image2.jpg';
@@ -6,24 +8,67 @@ import image3 from './image3.jpg';
 import image5 from './image5.jpeg';
 
 export const Login = () => {
+    const navigate = useNavigate();
+
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [boxBorderColor, setBoxBorderColor] = useState(getRandomRGBColor()); // Inicialmente, color de borde aleatorio
+    const [boxBorderColor, setBoxBorderColor] = useState(getRandomRGBColor());
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        if (username.trim() === "" || password.trim() === "") {
-            alert("Both fields must be filled");
+    async function login({ username, password }) {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Login API call failed with status ${response.status}`);
         }
-    };
 
-    const handleSignUp = (event) => {
+        const data = await response.json();
+        return data;
+    }
+
+      const handleLogin = async (event) => {
         event.preventDefault();
         if (username.trim() === "" || password.trim() === "") {
             alert("Both fields must be filled");
         } else {
-            alert("Sign Up successful!");
+            try {
+                const result = await login({ username, password });
+                if (result) { // Reemplaza esto con la condición que determine un inicio de sesión exitoso
+                    navigate("/menu"); // Navega a la ruta del menú
+                }
+            } catch (error) {
+                console.error(error); // Aquí puedes manejar errores de la llamada a la API
+            }
+        }
+    };
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+
+        if (username.trim() === "" || password.trim() === "") {
+            alert("Both fields must be filled");
+        } else {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            };
+
+            const response = await fetch('/register', requestOptions);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+                const data = await response.json();
+                alert("Sign Up successful!");
+                navigate("/menu"); // Navega a la ruta del menú
+            }
         }
     };
 
@@ -139,6 +184,7 @@ export const Login = () => {
                             type="submit"
                             className="btn btn-primary"
                             value="Login"
+                            onClick={handleLogin}
                             style={{
                                 width: '100%',
                                 padding: 15,
