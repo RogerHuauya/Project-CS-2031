@@ -15,6 +15,18 @@ export const Login = () => {
         event.preventDefault();
         if (username.trim() === "" || password.trim() === "") {
             alert("Both fields must be filled");
+<<<<<<< HEAD
+=======
+        } else {
+            try {
+                const result = await login({ username, password });
+                if (result===login({ username, password })) { // Reemplaza esto con la condición que determine un inicio de sesión exitoso
+                    navigate("/menu"); // Navega a la ruta del menú
+                }
+            } catch (error) {
+                console.error(error); // Aquí puedes manejar errores de la llamada a la API
+            }
+>>>>>>> 948d131 (nuevo)
         }
     };
 
