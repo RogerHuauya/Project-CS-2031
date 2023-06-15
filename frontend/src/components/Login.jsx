@@ -42,7 +42,7 @@ export const Login = () => {
         } else {
             try {
                 const result = await login({ username, password });
-                if (result) { // Reemplaza esto con la condición que determine un inicio de sesión exitoso
+                if (result===login({ username, password })) { // Reemplaza esto con la condición que determine un inicio de sesión exitoso
                     navigate("/menu"); // Navega a la ruta del menú
                 }
             } catch (error) {
