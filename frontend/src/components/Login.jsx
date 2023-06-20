@@ -15,10 +15,14 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [boxBorderColor, setBoxBorderColor] = useState(getRandomRGBColor());
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        if (username.trim() === "" || password.trim() === "") {
-            alert("Both fields must be filled");
+    async function login({ username, password }) {
+        const response = await fetch('https://localhost:4000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
 
         } else {
             try {
@@ -51,28 +55,9 @@ export const Login = () => {
         }
     };
 
-    const handleSignUp = async (event) => {
+    const handleSignUp = (event) => {
         event.preventDefault();
-
-        if (username.trim() === "" || password.trim() === "") {
-            alert("Both fields must be filled");
-        } else {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            };
-
-            const response = await fetch('/register', requestOptions);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            } else {
-                const data = await response.json();
-                alert("Sign Up successful!");
-                navigate("/menu"); // Navega a la ruta del menú
-            }
-        }
+        navigate("/signup"); // Navega a la ruta del registro
     };
 
     const changeBoxBorderColor = () => {
@@ -239,6 +224,7 @@ export const Login = () => {
                         </button>
                     </div>
                 </form>
+                
            </div>
             <div
                 style={{
