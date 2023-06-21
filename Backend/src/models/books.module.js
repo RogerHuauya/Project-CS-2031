@@ -7,7 +7,7 @@ const bookSchema = new moongose.Schema({
         trim: true,
     },
 
-    book_name:{
+    title:{
         type: String,
         required: true,
         trim: true,
@@ -17,7 +17,12 @@ const bookSchema = new moongose.Schema({
         type: Boolean,
         required: true,
     },
-
+    
+    user:{
+        type: moongose.Schema.Types.ObjectId,
+        ref : 'User',
+        required: true,
+    }
     
 }, { timestamps: true })
 
