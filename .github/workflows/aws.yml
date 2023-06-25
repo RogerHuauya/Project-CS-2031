@@ -6,10 +6,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     environment: AWS
-
     strategy:
       matrix:
         node-version: [14.x]
@@ -25,6 +23,11 @@ jobs:
         cd server
         npm ci
         npm run build --if-present
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: server/
     - name: 'Deploy to AWS Elastic Beanstalk'
       uses: einaregilsson/beanstalk-deploy@v14
       with:
@@ -33,5 +36,5 @@ jobs:
         application_name: ${{ secrets.AWS_APPLICATION_NAME }}
         environment_name: ${{ secrets.AWS_ENVIRONMENT_NAME }}
         version_label: ${{ github.run_number }}
-        region: us-west-2
-        deployment_package: 'server/'
+        region: ${{ secrets.AWS_REGION }}
+        deployment_package: 'dist.zip'  # This should be the zip file you want to deploy
