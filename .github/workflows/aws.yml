@@ -23,11 +23,10 @@ jobs:
         cd server
         npm ci
         npm run build --if-present
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: server/
+    - name: Generate deployment package
+      run: |
+        cd server
+        zip -r ../dist.zip . -x "node_modules/*" -x "dist/*"
     - name: 'Deploy to AWS Elastic Beanstalk'
       uses: einaregilsson/beanstalk-deploy@v14
       with:
