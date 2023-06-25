@@ -14,24 +14,45 @@ export const SignUp = () => {
 
         if (username.trim() === "" || password.trim() === "") {
             alert("All fields must be filled");
-        } else {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password})
-            };
+            return;
+        }
 
-            const response = await fetch('https://localhost:4000/register', requestOptions);
+        if (password.length < 8) {
+            alert("Password should be at least 8 characters long");
+            return;
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        };
+
+        try {
+            const response = await fetch('http://localhost:4000/auth/register', requestOptions);
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            } else {
-                const data = await response.json();
-                alert("Sign Up successful!");
-                navigate("/menu"); // Navega a la ruta del login
+                switch (response.status) {
+                    case 400:
+                        alert("Invalid user input");
+                        break;
+                    case 409:
+                        alert("Username already taken");
+                        break;
+                    default:
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return;
             }
+
+            alert("Sign Up successful!");
+            navigate("/menu");
+        } catch (error) {
+            console.error("An error occurred:", error);
+            alert("An unexpected error occurred. Please try again.");
         }
     };
+
 
     const handleGoHome = () => {
         navigate("/");
@@ -107,8 +128,8 @@ export const SignUp = () => {
                             <strong style={{ color: "black" }}>Password:</strong>
                         </label>
                         <input 
-                            type="password" i
-                            d="txtpas" 
+                            type="password"
+                            id="txtpas"
                             style={{ flexGrow: 1 }} 
                             className="form-control" 
                             value={password} 

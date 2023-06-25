@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Menu } from './Menu';
 import cuaderno from './cuaderno.png';
 import image1 from './image1.jpg';
 import image2 from './image2.jpg';
@@ -16,7 +15,7 @@ export const Login = () => {
     const [boxBorderColor, setBoxBorderColor] = useState(getRandomRGBColor());
 
     async function login({ username, password }) {
-        const response = await fetch('https://localhost:4000/login', {
+        const response = await fetch('http://localhost:4000/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -24,15 +23,8 @@ export const Login = () => {
           body: JSON.stringify({ username, password })
         });
 
-        } else {
-            try {
-                const result = await login({ username, password });
-                if (result===login({ username, password })) { // Reemplaza esto con la condición que determine un inicio de sesión exitoso
-                    navigate("/menu"); // Navega a la ruta del menú
-                }
-            } catch (error) {
-                console.error(error); // Aquí puedes manejar errores de la llamada a la API
-            }
+        if (!response.ok) {
+          throw new Error(`Login API call failed with status ${response.status}`);
         }
 
         const data = await response.json();
@@ -224,7 +216,7 @@ export const Login = () => {
                         </button>
                     </div>
                 </form>
-                
+
            </div>
             <div
                 style={{
@@ -240,4 +232,4 @@ export const Login = () => {
             />
         </div>
     );
-;
+};

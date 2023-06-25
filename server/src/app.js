@@ -8,15 +8,15 @@ import tasks_route from './routes/books.routes.js'
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:3000',
 }));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser())
 
 
-app.use('/bbuddy', authRoutes);
-app.use('/bbuddy', tasks_route);
+app.use('/auth', authRoutes);
+app.use('/tasks', tasks_route);
 
 
 export default app;

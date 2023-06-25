@@ -1,19 +1,15 @@
 import User from '../models/user.module.js'
-import Book from '../models/books.module.js'
 import bcrypt from 'bcryptjs'
 import {createAccessToken} from '../libs/jwt.js'
 
 
 export const register = async (req, res) => {
     const {username, password} = req.body
-
     try {
         
         const userFound = await User.findOne({username});
         if(userFound)
           return res.status(400).json(['The username already exists'])  
-
-
 
         const pass_hash = await bcrypt.hash(password, 8)
 
