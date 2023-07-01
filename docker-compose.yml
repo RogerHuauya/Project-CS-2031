@@ -17,7 +17,7 @@ services:
       - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 
   server:
-    image: rogerhuauya/productivity-app:server-latest
+    image: rogerhuauya/book-app:server-latest
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - TOKEN_KEY=${TOKEN_KEY}
