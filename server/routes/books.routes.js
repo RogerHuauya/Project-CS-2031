@@ -1,19 +1,25 @@
-import {Router} from 'express'
-import {authRequire} from '../middlewares/validateToken.js'
-import {getBooks, getBook, createBook, updateBook, deleteBook} from '../controllers/books.controllers.js'
-import { validateSchema } from '../middlewares/validator.middleware.js'
-import { createBookSchema } from '../schemas/book.schema.js'
+import { Router } from "express";
+import {
+  createBook,
+  deleteBook,
+  getBook,
+  getBooks,
+  updateBook,
+} from "../controllers/books.controllers.js";
+import { auth } from "../middlewares/auth.middleware.js";
+import { validateSchema } from "../middlewares/validator.middleware.js";
+import { createBookSchema } from "../schemas/book.schema.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/books', authRequire, getBooks)
-router.get('/books/:id', authRequire, getBook)
-router.post(
-    '/books', 
-    authRequire, 
-    validateSchema(createBookSchema),
-    createBook)
-router.delete('/books/:id', authRequire, deleteBook)
-router.put('/books/:id', authRequire, updateBook)
+router.get("/books", auth, getBooks);
 
-export default router
+router.post("/books", auth, validateSchema(createBookSchema), createBook);
+
+router.get("/books/:id", auth, getBook);
+
+router.put("/books/:id", auth, updateBook);
+
+router.delete("/books/:id", auth, deleteBook);
+
+export default router;
