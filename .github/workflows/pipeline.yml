@@ -3,8 +3,9 @@ name: Build and Deploy
 
 # Run the workflow when code is pushed to the main branch
 on:
-  pull_request:
-    branches: main
+  push:
+    branches:
+      - main
 
 # Set environment variables
 env:
