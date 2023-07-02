@@ -29,7 +29,7 @@ export const SignUp = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:4000/auth/register', requestOptions);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, requestOptions);
 
             if (!response.ok) {
                 switch (response.status) {
