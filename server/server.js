@@ -12,7 +12,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/5000";
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
-    app.listen(PORT, console.log("Server stated on port 5000"));
+    app.listen(PORT, console.log("Server stated on port 4000"));
   })
   .catch((err) => {
     console.log(err);
