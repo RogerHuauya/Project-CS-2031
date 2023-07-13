@@ -1,5 +1,30 @@
+// import { useBooks } from "../../context/booksContext";
+// import { Button, ButtonLink, Card } from "../../components/ui";
+// export function BookCard({ book }){
+//   const { deleteBook } = useBooks();
+
+//   return (
+//     <Card>
+//       <header className="flex justify-between">
+//         <h1 className="text-2xl font-bold">{book.title}</h1>
+//         <div className="flex gap-x-2 items-center">
+//           <Button onClick={() => deleteBook(book._id)}>Delete</Button>
+//           <ButtonLink to={`/books/${book._id}`}>Edit</ButtonLink>
+//         </div>
+//       </header>
+//       <p className="text-slate-300" style={{ fontSize: 'larger' }}>{book.author}</p>
+
+
+//       <p>
+//         <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
+//       </p>
+//     </Card>
+//     );
+//   }
+
 import { useBooks } from "../../context/booksContext";
 import { Button, ButtonLink, Card } from "../../components/ui";
+
 export function BookCard({ book }){
   const { deleteBook } = useBooks();
 
@@ -13,14 +38,11 @@ export function BookCard({ book }){
         </div>
       </header>
       <p className="text-slate-300" style={{ fontSize: 'larger' }}>{book.author}</p>
-      {/* <p>Owner: {owner}</p> */}
-      {/* <p><strong>Owner:</strong> {book.user.username}</p>  */}
 
-      <p>
-        <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
-      </p>
+      {/* New paragraph to display the username */}
+      <p className="text-slate-300" style={{ fontSize: 'medium' }}>Owner: {book.user.username}</p>
+      
+      <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
     </Card>
   );
-
-
-  }
+}
