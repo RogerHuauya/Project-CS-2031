@@ -4,14 +4,6 @@ import { Button, ButtonLink, Card } from "../../components/ui";
 export function BookCard({ book }) {
   const { deleteBook } = useBooks();
 
-  const renderOwner = () => {
-    if (book.user && book.user.username) {
-      return <p className="text-slate-500" style={{ fontSize: 'medium' }}>User: {book.user.username}</p>;
-    } else {
-      return <p className="text-slate-500" style={{ fontSize: 'medium' }}>User: Unknown</p>;
-    }
-  };
-
   return (
     <Card>
       <header className="flex justify-between">
@@ -22,11 +14,14 @@ export function BookCard({ book }) {
         </div>
       </header>
       <p className="text-slate-300" style={{ fontSize: 'larger' }}>{book.author}</p>
+      
+      {/* Add username here */}
+  <p className="text-slate-300" style={{ fontSize: 'larger' }}>Posted by: {book.user && book.user.username ? book.user.username : 'Unknown'}</p>
 
-      {renderOwner()}
 
-      <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
+      <p>
+        <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
+      </p>
     </Card>
   );
 }
-

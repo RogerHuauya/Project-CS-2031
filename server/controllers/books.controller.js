@@ -9,17 +9,6 @@ export const getBooks = async (req, res) => {
   }
 };
 
-
-export const getAllBooks = async (req, res) => {
-  try {
-    const books = await Book.find();
-    res.json(books);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-
 export const createBook = async (req, res) => {
   try {
     const { author, title, status, date } = req.body;
@@ -64,12 +53,29 @@ export const updateBook = async (req, res) => {
   }
 };
 
+
+export const getAllBooks = async (req, res) => {
+  try {
+    const books = await Book.find().populate('user');
+    res.json(books);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 export const getBook = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const book = await Book.findById(req.params.id).populate('user');
     if (!book) return res.status(404).json({ message: "Book not found" });
     return res.json(book);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+
+
+

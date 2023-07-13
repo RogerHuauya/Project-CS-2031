@@ -14,7 +14,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get("/", (req, res) => {
+("/", (req, res) => {
   res.send("Hello World!");
 });
 
