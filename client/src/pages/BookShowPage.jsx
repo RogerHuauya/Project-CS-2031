@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useBooks } from "../context/booksContext";
-import { BookCard } from "../components/books/BookCard";
+import { GlobalBookCard } from "../components/books/GlobalBookCard";
+
 
 export function BookShowPage() {
   const { getLoanBooks } = useBooks(); // use the new function from the context
@@ -22,7 +23,7 @@ export function BookShowPage() {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
       {books.map((book) => (
-        <BookCard book={book} key={book._id} /> // use BookCard component instead of Card
+        <GlobalBookCard book={book} key={book._id} /> // use BookCard component instead of Card
       ))}
     </div>
   );
