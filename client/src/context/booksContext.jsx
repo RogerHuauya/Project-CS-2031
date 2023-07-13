@@ -70,9 +70,6 @@ export function BookProvider({ children }) {
     }
   };
 
-
-
-
   return (
     <BookContext.Provider
       value={{

@@ -1,8 +1,16 @@
 import { useBooks } from "../../context/booksContext";
 import { Button, ButtonLink, Card } from "../../components/ui";
 
-export function BookCard({ book }){
+export function BookCard({ book }) {
   const { deleteBook } = useBooks();
+
+  const renderOwner = () => {
+    if (book.user && book.user.username) {
+      return <p className="text-slate-500" style={{ fontSize: 'medium' }}>User: {book.user.username}</p>;
+    } else {
+      return <p className="text-slate-500" style={{ fontSize: 'medium' }}>User: Unknown</p>;
+    }
+  };
 
   return (
     <Card>
@@ -15,10 +23,10 @@ export function BookCard({ book }){
       </header>
       <p className="text-slate-300" style={{ fontSize: 'larger' }}>{book.author}</p>
 
-      {/* New paragraph to display the username */}
-      <p className="text-slate-300" style={{ fontSize: 'medium' }}>Owner: {book.user.username}</p>
-      
+      {renderOwner()}
+
       <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
     </Card>
   );
 }
+
