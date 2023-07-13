@@ -25,7 +25,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/add-book" element={<BookFormPage />} />
-                <Route path="/show-book" element={<BookShowPage />} />
+                <Route path="/all" element={<BookShowPage />} />
                 <Route path="/books/:id" element={<BookFormPage />} />
                 <Route path="/profile" element={<h1>Profile</h1>} />
               </Route>

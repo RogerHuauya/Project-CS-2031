@@ -1,7 +1,6 @@
 import { useBooks } from "../../context/booksContext";
-import { Button, ButtonLink, Card } from "../ui";
-
-export function BookCard({ book }) {
+import { Button, ButtonLink, Card } from "../../components/ui";
+export function BookCard({ book }){
   const { deleteBook } = useBooks();
 
   return (
@@ -14,17 +13,14 @@ export function BookCard({ book }) {
         </div>
       </header>
       <p className="text-slate-300" style={{ fontSize: 'larger' }}>{book.author}</p>
+      {/* <p>Owner: {owner}</p> */}
+      {/* <p><strong>Owner:</strong> {book.user.username}</p>  */}
 
       <p>
-        {/* {book.date &&
-          new Date(book.date).toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })} */}
         <p className="text-slate-300" style={{ fontSize: 'larger', textAlign: 'right' }}>{book.status ? 'Available' : 'Unavailable'}</p>
       </p>
     </Card>
   );
-}
+
+
+  }

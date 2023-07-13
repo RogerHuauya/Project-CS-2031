@@ -11,4 +11,4 @@ export const deleteBookRequest = async (id) => axios.delete(`/books/${id}`);
 
 export const getBookRequest = async (id) => axios.get(`/books/${id}`);
 
-export const getLoanBooksRequest = async () => axios.get("/books/show");
+export const getLoanBooksRequest = async () => axios.get("/books/all");
