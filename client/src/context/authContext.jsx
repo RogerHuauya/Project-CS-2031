@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import { loginRequest, registerRequest, verifyTokenRequest } from "../bbuddy/auth";
-// import { loginRequest, registerRequest, verifyTokenRequest } from "../bbuddy/auth";
-
 
 import Cookies from "js-cookie";
 
@@ -48,9 +46,9 @@ export const AuthProvider = ({ children }) => {
       const res = await loginRequest(user);
       setUser(res.data);
       setIsAuthenticated(true);
+      console.log("raaaaa")
     } catch (error) {
-      console.log(error);
-      // setErrors(error.response.data.message);
+      console.error(error);
     }
   };
 
@@ -63,6 +61,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       const cookies = Cookies.get();
+      console.log(cookies, "cok")
       if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);

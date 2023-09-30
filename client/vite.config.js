@@ -13,6 +13,7 @@ export default defineConfig(({command, mode}) => {
       host: '0.0.0.0',
       port: 3000, // use your desired port
       strictPort: true, // make Vite fail if the port is already in use
+        https: false,
     },
   }
 })

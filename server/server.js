@@ -1,6 +1,6 @@
 import app from './app.js'
 import mongoose from 'mongoose'
-/* Loading the environment variables from the .env file. */
+/* Loading the environment variables from the ...env file. */
 
 import dotenv from "dotenv";
 dotenv.config();
