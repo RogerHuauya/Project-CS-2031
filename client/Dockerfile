@@ -11,6 +11,9 @@ COPY package.json .
 # Layer 4: Installing the dependencies listed in the package.json file.
 RUN npm install
 
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+RUN mkdir -p node_modules/.vite && chmod -R 777 node_modules/.vite
+
 # Layer 5: Copying all the files from the root of the project to the `app` directory in the container.
 COPY . .
 
