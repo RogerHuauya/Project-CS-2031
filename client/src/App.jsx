@@ -9,6 +9,7 @@ import { BookFormPage } from "./pages/BookFormPage";
 import { LoginPage } from "./pages/LoginPage";
 import { BooksPage } from "./pages/BooksPage";
 import { BookShowPage } from './pages/BookShowPage';
+import { UserShowPage } from './pages/UserShowPage';
 import { BookProvider } from "./context/booksContext";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/add-book" element={<BookFormPage />} />
                 <Route path="/show-books" element={<BookShowPage />} />
+                <Route path="/show-users" element={<UserShowPage />} />
                 <Route path="/books/:id" element={<BookFormPage />} />
                 <Route path="/profile" element={<h1>Profile</h1>} />
               </Route>

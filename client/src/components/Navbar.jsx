@@ -20,6 +20,9 @@ export function Navbar() {
             <li>
               <ButtonLink to="/add-book">Add Book</ButtonLink>
             </li>
+              <li>
+              <ButtonLink to="/show-users">Show all users</ButtonLink>
+            </li>
             <li>
               <ButtonLink to="/show-books">Show all books</ButtonLink>
             </li>
