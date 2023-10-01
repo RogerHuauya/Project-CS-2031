@@ -4,32 +4,32 @@ import { Button, Card } from "../components/ui";
 import { useBooks } from "../context/booksContext";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import axios from "../bbuddy/axios.js";
+import {BookCard} from "../components/books/BookCard.jsx";
 dayjs.extend(utc);
 
 export function BookShowPage() {
   const { getBook } = useBooks();
   const { id } = useParams();
-  const [book, setBook] = useState(null);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const fetchBook = async () => {
-      const fetchedBook = await getBook(id);
-      setBook(fetchedBook);
+        const response = await axios.get("public_books/");
+        setBooks(response.data);
     };
-
     fetchBook();
   }, [id]);
 
-  if (!book) {
+  if (!books) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Card>
-      <p><strong>Title:</strong> {book.title}</p>
-      <p><strong>Author:</strong> {book.author}</p>
-      <p><strong>Status:</strong> {book.status ? 'Available' : 'Unavailable'}</p>
-      <p><strong>Date:</strong> {book.date ? dayjs(book.date).utc().format("DD-MM-YYYY") : ""}</p>
-    </Card>
+    <div className="flex flex-col gap-y-5">
+        {books.map((book) => (
+            <BookCard key={book._id} book={book} />
+        ))}
+    </div>
   );
 }

@@ -21,7 +21,7 @@ export function Navbar() {
               <ButtonLink to="/add-book">Add Book</ButtonLink>
             </li>
             <li>
-              <ButtonLink to="/show-book">Search</ButtonLink>
+              <ButtonLink to="/show-books">Show all books</ButtonLink>
             </li>
             <li>
               <Link to="/" onClick={() => logout()}>

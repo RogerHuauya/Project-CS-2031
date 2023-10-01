@@ -2,6 +2,17 @@
 version: "3.8"
 # Telling docker-compose to build the client and server images and run them in containers.
 services:
+  nginx:
+    build: ./nginx
+    container_name: nginx_c
+    depends_on:
+      - client
+      - server
+      - public_books
+      - public_users
+    ports:
+      - "80:80"
+
   client:
     # Telling docker-compose to build the client image using the Dockerfile in the client directory.
     build: ./client
@@ -17,6 +28,7 @@ services:
     # Allows you to run container in detached mode.
     stdin_open: true
     tty: true
+
   server:
     # Telling docker-compose to build the client image using the Dockerfile in the server directory.
     build: ./server
@@ -25,4 +37,21 @@ services:
       - "4000:4000"
     volumes:
       - ./server:/app
+      - /app/node_modules
+  public_books:
+    build: ./public_books
+    container_name: public_books_app_c
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./public_books:/app
+      - /app/node_modules
+
+  public_users:
+    build: ./public_users
+    container_name: public_users_app_c
+    ports:
+      - "4002:4000"
+    volumes:
+      - ./public_users:/app
       - /app/node_modules
