@@ -1,5 +1,6 @@
 # Layer 1: Telling Docker to use the node:17-alpine image as the base image for the container.
 FROM node:16-alpine
+USER root
 
 # Layer 2: Telling Docker to create a directory called `app` in the container and set it as the working directory.
 WORKDIR /app
